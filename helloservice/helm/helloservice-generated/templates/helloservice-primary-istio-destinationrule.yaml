@@ -1,0 +1,7 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  creationTimestamp: null
+  name: helloservice-primary
+spec:
+  host: helloservice-primary.podtato-head-prod-a.svc.cluster.local

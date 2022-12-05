@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: helloservice-primary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloservice-primary
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      creationTimestamp: null
+      labels:
+        app: helloservice-primary
+    spec:
+      containers:
+      - image: ghcr.io/podtato-head/podtatoserver:v0.1.0
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          timeoutSeconds: 5
+        name: server
+        ports:
+        - containerPort: 9000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          timeoutSeconds: 5
+        resources: {}
+status: {}
