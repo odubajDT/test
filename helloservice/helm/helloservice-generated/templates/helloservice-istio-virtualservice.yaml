@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  creationTimestamp: null
+  name: helloservice
+spec:
+  gateways:
+  - public-gateway.istio-system
+  - mesh
+  hosts:
+  - helloservice.podtato-head-prod-b.svc.cluster.local
+  - helloservice
+  http:
+  - route:
+    - destination:
+        host: helloservice-canary.podtato-head-prod-b.svc.cluster.local
+    - destination:
+        host: helloservice-primary.podtato-head-prod-b.svc.cluster.local
+      weight: 100
