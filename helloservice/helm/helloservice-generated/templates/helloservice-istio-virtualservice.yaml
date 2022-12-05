@@ -14,6 +14,6 @@ spec:
   - route:
     - destination:
         host: helloservice-canary.podtato-head-staging.svc.cluster.local
+      weight: 100
     - destination:
         host: helloservice-primary.podtato-head-staging.svc.cluster.local
-      weight: 100
