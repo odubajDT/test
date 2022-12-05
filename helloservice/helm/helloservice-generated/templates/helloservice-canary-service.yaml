@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: helloservice
+  name: helloservice-canary
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: helloservice
+status:
+  loadBalancer: {}
